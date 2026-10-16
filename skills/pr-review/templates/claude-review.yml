@@ -1,0 +1,65 @@
+# Automatic Claude review on every pull request, gating merges on critical findings.
+# Installed by the pr-review skill (~/.claude/skills/pr-review). Rubric: .github/claude-review-rubric.md
+#
+# One-time setup (repo owner, in GitHub):
+#  1. Settings > Secrets and variables > Actions: add ANTHROPIC_API_KEY.
+#  2. Settings > Branches (or Rules) > protect the default branch: "Require status checks to pass",
+#     add the check "claude-review". Critical findings then block merging; warnings are comments only.
+# Note: pull requests from forks don't get repository secrets, so the review (and the gate) fails for them by design.
+
+name: Claude review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: claude-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  claude-review:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Review this pull request strictly by the rubric in .github/claude-review-rubric.md. Read it first.
+            1. Get the diff with `gh pr diff ${{ github.event.pull_request.number }}`; read surrounding code with Read/Grep/Glob.
+            2. Post each verified finding as an inline comment on its line with
+               mcp__github_inline_comment__create_inline_comment, in the rubric's comment format.
+            3. Post one summary comment with `gh pr comment`, ending with the VERDICT line.
+            4. Write the file review-verdict.txt in the working directory containing exactly BLOCK if there is at
+               least one CRITICAL finding, otherwise exactly PASS. Do this last, even if there are no findings.
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Grep,Glob,Write"
+
+      - name: Gate on critical findings
+        run: |
+          if [ ! -f review-verdict.txt ]; then
+            echo "::error::The review did not complete; merge stays blocked until it does."
+            exit 1
+          fi
+          verdict=$(tr -d '[:space:]' < review-verdict.txt)
+          if [ "$verdict" = "PASS" ]; then
+            echo "No critical findings."
+          else
+            echo "::error::Critical findings: merge blocked. See the inline review comments."
+            exit 1
+          fi
