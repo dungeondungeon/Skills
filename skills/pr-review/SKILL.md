@@ -1,6 +1,6 @@
 ---
 name: pr-review
-description: Review code changes for what breaks in production — logic errors, SQL and other injection, unhandled edge cases, N+1 queries and performance, and anything touching auth, payments or data deletion — ignoring style. Use before every commit, push or pull request Claude makes, whenever asked to review a PR, branch, diff or uncommitted changes, and to install the automatic pull-request review that gates merges in a GitHub repo.
+description: Review code changes for what breaks in production — logic errors, SQL and other injection, unhandled edge cases, N+1 queries and performance, and anything touching auth, payments or data deletion — ignoring style. Use before every commit, push or pull request Claude makes, whenever asked to review a PR, branch, diff or uncommitted changes, and to install the automatic pull-request review that gates merges in a GitHub repo. Not for style, formatting or naming feedback.
 ---
 
 # PR review: catch what breaks in production

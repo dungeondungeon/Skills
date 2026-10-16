@@ -1,6 +1,6 @@
 ---
 name: spd-sprites
-description: Inspect, diff, merge and port item sprites between Pixel Dungeon sprite sheets (Deepest / SPD / EPD items.png and ItemSpriteSheet.java). Use when adding sprites for new items, porting items from Experienced Pixel Dungeon or another fork, finding free sprite cells, or previewing sprites.
+description: Inspect, diff, merge and port item sprites between Pixel Dungeon sprite sheets (Deepest / SPD / EPD items.png and ItemSpriteSheet.java). Use when adding sprites for new items, porting items from Experienced Pixel Dungeon or another fork, finding free sprite cells, or previewing sprites. Not for mob, hero or UI sprite sheets.
 ---
 
 # Pixel Dungeon sprite sheets

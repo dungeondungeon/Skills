@@ -11,6 +11,7 @@ My Claude skills, one folder per skill. Each folder holds a `SKILL.md` (name, on
 | [pr-review](skills/pr-review/SKILL.md) | Reviews changes for what breaks in production (logic, injection, edge cases, N+1, auth, payments, deletes), ignoring style. Can install an automatic PR review that gates merges. | `rubric.md`, `templates/claude-review.yml` |
 | [user-research](skills/user-research/SKILL.md) | Finds what users or players say online and checks it against the project's design docs: covered, conflicting, or missing. New ideas go to the backlog only. | none |
 | [project-context-optimizer](skills/project-context-optimizer/SKILL.md) | Audits a big project and restructures it so sessions load less: lean CLAUDE.md, split docs with an index, plans/ and tools/ folders. | `audit.py`, `split_doc.py` |
+| [script-library](skills/script-library/SKILL.md) | Checks for a tested script before Claude writes a new one, logs what was missing and what was reused, shows what to build next, and audits skills for broken, stale, unused or overlapping parts. | `library.py` |
 
 ### Project skills (`project-skills/<project>/`)
 
@@ -55,6 +56,7 @@ Then upload each zip under Settings > Capabilities > Skills. Uploading a skill w
 
 ## Adding or changing a skill
 
-1. Create `skills/<name>/SKILL.md` with frontmatter `name` (kebab-case, same as the folder) and `description` (one sentence saying *when* to use it; only this loads until the skill is used).
+1. Create `skills/<name>/SKILL.md` with frontmatter `name` (kebab-case, same as the folder) and `description` (say *when* to use it and end with a "Not for ..." line saying when not to; only this loads until the skill is used).
 2. Keep the body short and put long reference material in separate files the skill points to.
-3. Commit, then re-zip and re-upload to claude.ai if you use it there. Claude Code picks up linked changes on its own.
+3. Run `python skills/script-library/library.py audit .` to catch broken scripts, missing files and overlapping descriptions.
+4. Commit, then re-zip and re-upload to claude.ai if you use it there. Claude Code picks up linked changes on its own.
