@@ -25,13 +25,24 @@ function Link-Skills($sourceDir, $targetDir) {
 }
 
 if ($Zip) {
+    Add-Type -AssemblyName System.IO.Compression, System.IO.Compression.FileSystem
     $dist = Join-Path $repo 'dist'
     New-Item -ItemType Directory -Force -Path $dist | Out-Null
     $folders = @(Get-ChildItem -Directory (Join-Path $repo 'skills'))
     $folders += Get-ChildItem -Directory (Join-Path $repo 'project-skills') | ForEach-Object { Get-ChildItem -Directory $_.FullName }
     foreach ($f in $folders) {
         $out = Join-Path $dist "$($f.Name).zip"
-        Compress-Archive -Path $f.FullName -DestinationPath $out -Force
+        # Not Compress-Archive: Windows PowerShell 5.1 writes backslash paths, which claude.ai rejects.
+        if (Test-Path $out) { Remove-Item $out }
+        $archive = [System.IO.Compression.ZipFile]::Open($out, 'Create')
+        try {
+            Get-ChildItem -Recurse -File $f.FullName | ForEach-Object {
+                $rel = $_.FullName.Substring($f.FullName.Length + 1) -replace '\\', '/'
+                [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($archive, $_.FullName, "$($f.Name)/$rel") | Out-Null
+            }
+        } finally {
+            $archive.Dispose()
+        }
         Write-Host "zip   $out"
     }
 } elseif ($Project) {
