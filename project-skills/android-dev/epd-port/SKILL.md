@@ -1,6 +1,6 @@
 ---
 name: epd-port
-description: Port a system, item or mob from Experienced Pixel Dungeon Redone (EPD) into Deepest Pixel Dungeon (an SPD v4.0.2 fork). Use when bringing over any EPD class, recipe, loot bag, quest, level or mechanic, or when asked to "add the EPD stuff".
+description: Port a system, item or mob from Experienced Pixel Dungeon Redone (EPD) into Deepest Pixel Dungeon (an SPD v4.0.2 fork). Use when bringing over any EPD class, recipe, loot bag, quest, level or mechanic, or when asked to "add the EPD stuff". Not for original features with no EPD source.
 ---
 
 # Porting from EPD into Deepest Pixel Dungeon

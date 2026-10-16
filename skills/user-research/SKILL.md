@@ -1,6 +1,6 @@
 ---
 name: user-research
-description: Research what users, players or customers say online about a topic, product or kind of feature (complaints, requests, praise, missing features in similar products), compare it against the current project's own plans, and report what is already covered, what conflicts and what is genuinely missing. New ideas go only to the project's backlog or parked list, never into active scope. Use when the user asks to check feedback, find missing features, see what people want, scan competitors or similar products, or validate a design against real users.
+description: Research what users, players or customers say online about a topic, product or kind of feature (complaints, requests, praise, missing features in similar products), compare it against the current project's own plans, and report what is already covered, what conflicts and what is genuinely missing. New ideas go only to the project's backlog or parked list, never into active scope. Use when the user asks to check feedback, find missing features, see what people want, scan competitors or similar products, or validate a design against real users. Not for technical research such as library docs, APIs or bug fixes.
 ---
 
 # User research
