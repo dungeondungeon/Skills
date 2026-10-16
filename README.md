@@ -18,8 +18,8 @@ These only make sense inside one project, so they install into that project's `.
 
 | Project | Skill | What it does |
 |---|---|---|
-| android-dev | [spd-sprites](project-skills/android-dev/spd-sprites/SKILL.md) | _(fill in from its description)_ |
-| android-dev | [epd-port](project-skills/android-dev/epd-port/SKILL.md) | _(fill in from its description)_ |
+| android-dev | [spd-sprites](project-skills/android-dev/spd-sprites/SKILL.md) | Inspects, diffs, merges and ports item sprites between Pixel Dungeon sprite sheets, with `sprite_tool.py` (needs Pillow). |
+| android-dev | [epd-port](project-skills/android-dev/epd-port/SKILL.md) | Ports systems, items and mobs from Experienced Pixel Dungeon Redone into Deepest Pixel Dungeon, with translation rules and a per-item checklist. |
 
 ## Install
 
