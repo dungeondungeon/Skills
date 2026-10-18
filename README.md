@@ -12,6 +12,9 @@ My Claude skills, one folder per skill. Each folder holds a `SKILL.md` (name, on
 | [user-research](skills/user-research/SKILL.md) | Finds what users or players say online and checks it against the project's design docs: covered, conflicting, or missing. New ideas go to the backlog only. | none |
 | [project-context-optimizer](skills/project-context-optimizer/SKILL.md) | Audits a big project and restructures it so sessions load less: lean CLAUDE.md, split docs with an index, plans/ and tools/ folders. | `audit.py`, `split_doc.py` |
 | [script-library](skills/script-library/SKILL.md) | Checks for a tested script before Claude writes a new one, logs what was missing and what was reused, shows what to build next, and audits skills for broken, stale, unused or overlapping parts. | `library.py` |
+| [handoff](skills/handoff/SKILL.md) | Writes a `HANDOFF.md` checkpoint that another session or assistant (Codex, ChatGPT) can resume from, separating verified from unverified work, and checks a handoff against the repo when resuming. | `handoff.py` |
+| [plain-writing](skills/plain-writing/SKILL.md) | Rewrites prose so it sounds human and reads easily (no em dashes or stock AI words, short sentences, active voice), with an optional light Simplified Technical English mode. | `check.py` |
+| [grill-me](skills/grill-me/SKILL.md) | Interviews you before a build, asking only questions that change the work, in short batches with recommended answers, then writes a spec. | none |
 
 ### Project skills (`project-skills/<project>/`)
 
