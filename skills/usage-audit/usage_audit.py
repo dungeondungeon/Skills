@@ -115,8 +115,13 @@ def load(projects, since, match):
                         if b.get("name") == "Read" and not side:
                             s["reads"][(b.get("input") or {}).get("file_path", "?")] += 1
             elif e.get("type") == "user" and not side:
-                if not s["prompt"] and isinstance(m.get("content"), str) and not m["content"].startswith("<"):
-                    s["prompt"] = " ".join(m["content"].split())[:60]  # names the session when it has no title
+                c = m.get("content")
+                texts = [c] if isinstance(c, str) else [b.get("text", "") for b in c or [] if isinstance(b, dict) and b.get("type") == "text"]
+                for t in texts if not s["prompt"] else []:
+                    t = re.sub(r"<([\w-]+)[^>]*>.*?</\1>", " ", t, flags=re.S)  # drop harness-added tagged blocks
+                    if t.strip() and not t.lstrip().startswith("<"):
+                        s["prompt"] = " ".join(t.split())[:60]  # names the session when it has no title
+                        break
                 for b in m.get("content") if isinstance(m.get("content"), list) else []:
                     if isinstance(b, dict) and b.get("type") == "tool_result":
                         s["order"].append(("res", (tools.get(b.get("tool_use_id"), "tool"), text_len(b.get("content")) // 4)))
