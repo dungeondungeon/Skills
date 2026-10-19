@@ -81,7 +81,7 @@ def ts(e):
 
 
 def load(projects, since, match):
-    sessions = defaultdict(lambda: {"reqs": {}, "results": [], "reads": Counter(), "title": "", "cwd": "",
+    sessions = defaultdict(lambda: {"reqs": {}, "results": [], "reads": Counter(), "title": "", "prompt": "", "cwd": "",
                                     "start": None, "end": None, "order": []})
     for f in glob.glob(os.path.join(os.path.expanduser(projects), "**", "*.jsonl"), recursive=True):
         sub_file = "subagents" in f.replace("\\", "/").split("/")
@@ -115,6 +115,8 @@ def load(projects, since, match):
                         if b.get("name") == "Read" and not side:
                             s["reads"][(b.get("input") or {}).get("file_path", "?")] += 1
             elif e.get("type") == "user" and not side:
+                if not s["prompt"] and isinstance(m.get("content"), str) and not m["content"].startswith("<"):
+                    s["prompt"] = " ".join(m["content"].split())[:60]  # names the session when it has no title
                 for b in m.get("content") if isinstance(m.get("content"), list) else []:
                     if isinstance(b, dict) and b.get("type") == "tool_result":
                         s["order"].append(("res", (tools.get(b.get("tool_use_id"), "tool"), text_len(b.get("content")) // 4)))
@@ -163,11 +165,13 @@ def main(a):
                 rent.append((val[1] * later, val[1], later, val[0], s["title"] or sid[:8]))
         peak = max(ctx) if ctx else 0
         rereads = sum(n - 1 for n in s["reads"].values() if n > 1)
+        s["title"] = s["title"] or s["prompt"]
         rows.append({"session": sid, "title": s["title"], "cwd": s["cwd"], "start": s["start"].isoformat()[:16],
                      "requests": len(ctx), "peak_ctx": peak, "cost": round(total, 3), "subagent_share": round(sub / total, 2) if total else 0,
                      "opus_share": round(opus / total, 2) if total else 0, "cache_misses": misses, "rereads": rereads,
                      "top_rereads": [(os.path.basename(k), n) for k, n in s["reads"].most_common(3) if n > 2]})
         flags["long"] += peak > 150_000
+        flags["huge"] += peak > 400_000
         flags["misses"] += misses >= 3
         flags["rereads"] += rereads >= 5
         flags["subagents"] += total and sub / total > 0.4
@@ -198,6 +202,8 @@ def main(a):
         tips.append("Most usage is Opus/Fable. Default to Sonnet (/model), keep Opus for planning and hard bugs.")
     if flags["long"]:
         tips.append(f"{flags['long']}/{n} sessions passed 150k context. /clear between tasks; start each feature from its plans/ file.")
+    if flags["huge"]:
+        tips.append(f"{flags['huge']}/{n} sessions passed 400k context (the 1M window). Set \"autoCompactWindow\": 200000 in ~/.claude/settings.json so they compact at 200k.")
     if flags["misses"]:
         tips.append(f"{flags['misses']}/{n} sessions had 3+ cache misses. After a break of an hour or more, /clear and resume from HANDOFF.md instead of continuing.")
     if flags["rereads"]:
