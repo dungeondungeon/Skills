@@ -1,6 +1,6 @@
 ---
 name: project-context-optimizer
-description: Audit and restructure a large or long-running project so Claude sessions load less and remember more — lean CLAUDE.md files, design docs split into per-section files with an index, plans/ and tools/ folders, project skills and memory used for the right things. Use when starting work in a big project that lacks this structure (CLAUDE.md over ~150 lines, docs over ~20k tokens, several reference repos, many sessions), or whenever the user asks about saving tokens, context, memory, skills or organising project files. Not for small projects that already load little, or for one-off coding tasks.
+description: Audit and restructure a large or long-running project so Claude sessions load less and remember more — lean CLAUDE.md files, design docs split into per-section files with an index, plans/ and tools/ folders, project skills and memory used for the right things. Use when starting work in a big project that lacks this structure (CLAUDE.md over ~150 lines, docs over ~20k tokens, several reference repos, many sessions), or whenever the user asks about saving context through project files, docs, memory or skills. Not for small projects that already load little, for one-off coding tasks, or for finding what uses up usage limits (use usage-audit first).
 ---
 
 # Project context optimizer
