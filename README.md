@@ -15,7 +15,7 @@ My Claude skills, one folder per skill. Each folder holds a `SKILL.md` (name, on
 | [handoff](skills/handoff/SKILL.md) | Writes a `HANDOFF.md` checkpoint that another session or assistant (Codex, ChatGPT) can resume from, separating verified from unverified work, and checks a handoff against the repo when resuming. | `handoff.py` |
 | [plain-writing](skills/plain-writing/SKILL.md) | Rewrites prose so it sounds human and reads easily (no em dashes or stock AI words, short sentences, active voice), with an optional light Simplified Technical English mode. | `check.py` |
 | [grill-me](skills/grill-me/SKILL.md) | Interviews you before a build, asking only questions that change the work, in short batches with recommended answers, then writes a spec. | none |
-| [usage-audit](skills/usage-audit/SKILL.md) | Finds what uses up your Claude Code limits from local transcripts (model mix, long sessions, cache misses, subagents, big tool results, re-reads) and ranks the fixes. Includes an optional hook that trims build and test output. | `usage_audit.py`, `trim_output.py` |
+| [web-craft](skills/web-craft/SKILL.md) | Makes websites fast, usable, accessible and responsive: UX structure, Core Web Vitals, images/fonts, semantic HTML, forms, motion. Complements Anthropic's `frontend-design` (visual style) and ends with a static check. | `check.py`, `reference/performance.md`, `reference/ux-a11y.md` |
 
 ### Project skills (`project-skills/<project>/`)
 
