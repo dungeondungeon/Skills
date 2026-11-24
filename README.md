@@ -16,6 +16,7 @@ My Claude skills, one folder per skill. Each folder holds a `SKILL.md` (name, on
 | [plain-writing](skills/plain-writing/SKILL.md) | Rewrites prose so it sounds human and reads easily (no em dashes or stock AI words, short sentences, active voice), with an optional light Simplified Technical English mode. | `check.py` |
 | [grill-me](skills/grill-me/SKILL.md) | Interviews you before a build, asking only questions that change the work, in short batches with recommended answers, then writes a spec. | none |
 | [web-craft](skills/web-craft/SKILL.md) | Makes websites fast, usable, accessible and responsive: UX structure, Core Web Vitals, images/fonts, semantic HTML, forms, motion. Complements Anthropic's `frontend-design` (visual style) and ends with a static check. | `check.py`, `reference/performance.md`, `reference/ux-a11y.md` |
+| [crew](skills/crew/SKILL.md) | Planner-and-workers setup: strong model plans and checks, cheaper models do bounded tasks, with a run-check-fix loop (2-round cap), independent verifier, lessons file and real compaction settings. Claude Code agent templates plus a plain-markdown version for Codex, Cursor and others. Includes a fact-check of the viral "God mode" claims. | `crew.py`, `templates/`, `reference/` |
 
 ### Project skills (`project-skills/<project>/`)
 
