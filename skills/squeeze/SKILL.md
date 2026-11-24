@@ -34,7 +34,7 @@ Every squeezed result ends with `[squeezed kind: ~A -> ~B tokens. Full original:
 
 1. Before `Read` or `cat` on a file that is clearly large and not code you will edit: JSON dumps, API responses, exports, logs.
 2. Before printing a long command's output into the session: pipe it through `filter`.
-3. An HTML artifact or design page that gets re-read after each edit: run `show` once to get the outline, then `get ID A-B` for only the section being changed, and edit by line range. This targets the repeated whole-page reads that show up in `usage_audit.py`.
+3. An HTML artifact or design page that gets re-read after each edit: run `show` once to get the outline, then `get ID A-B` for only the section being changed, and edit by line range. This targets the repeated whole-page reads that show up in the usage-audit skill.
 4. Do not squeeze what you are about to edit exactly (code, config), or anything where one dropped line could change the answer. If an error is reported but its cause isn't in the compact view, `get` the range before guessing.
 
 ## What it will and will not do (measured, not claimed)
@@ -51,7 +51,7 @@ Test inputs, sizes estimated as chars/4, compact view only (the first read):
 | Synthetic multi-line HTML page, 25 sections | ~7,550 | ~420 | Outline only. Reading a section costs a `get`. |
 | One-line prose paragraph set | ~3,080 | unchanged | Prose is not compressed. |
 
-Read these carefully. The big percentages come from hiding content, not from clever compression, and they are the best case. If Claude then needs the hidden part, `get` adds it back, so a net saving needs most squeezed inputs to be skimmable. None of this has been measured on real Claude Code sessions yet. To check, run `usage_audit.py` (usage-audit skill) for a week before and a week after and compare "tool results that stayed in context longest" and total cache reads.
+Read these carefully. The big percentages come from hiding content, not from clever compression, and they are the best case. If Claude then needs the hidden part, `get` adds it back, so a net saving needs most squeezed inputs to be skimmable. None of this has been measured on real Claude Code sessions yet. To check, run the usage-audit skill for a week before and a week after and compare "tool results that stayed in context longest" and total cache reads.
 
 ## Compared with Headroom, and what is deliberately left out
 
