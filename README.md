@@ -16,6 +16,7 @@ My Claude skills, one folder per skill. Each folder holds a `SKILL.md` (name, on
 | [plain-writing](skills/plain-writing/SKILL.md) | Rewrites prose so it sounds human and reads easily (no em dashes or stock AI words, short sentences, active voice), with an optional light Simplified Technical English mode. | `check.py` |
 | [grill-me](skills/grill-me/SKILL.md) | Interviews you before a build, asking only questions that change the work, in short batches with recommended answers, then writes a spec. | none |
 | [web-craft](skills/web-craft/SKILL.md) | Makes websites fast, usable, accessible and responsive: UX structure, Core Web Vitals, images/fonts, semantic HTML, forms, motion. Complements Anthropic's `frontend-design` (visual style) and ends with a static check. | `check.py`, `reference/performance.md`, `reference/ux-a11y.md` |
+| [memory](skills/memory/SKILL.md) | Plain-file project memory (one fact per file plus a small index) that Claude and Codex can both use: save, recall, audit for bloat and staleness. States plainly what memory costs in tokens vs Claude-mem and built-in auto memory. | `mem.py` |
 
 ### Project skills (`project-skills/<project>/`)
 
