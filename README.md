@@ -16,6 +16,7 @@ My Claude skills, one folder per skill. Each folder holds a `SKILL.md` (name, on
 | [plain-writing](skills/plain-writing/SKILL.md) | Rewrites prose so it sounds human and reads easily (no em dashes or stock AI words, short sentences, active voice), with an optional light Simplified Technical English mode. | `check.py` |
 | [grill-me](skills/grill-me/SKILL.md) | Interviews you before a build, asking only questions that change the work, in short batches with recommended answers, then writes a spec. | none |
 | [web-craft](skills/web-craft/SKILL.md) | Makes websites fast, usable, accessible and responsive: UX structure, Core Web Vitals, images/fonts, semantic HTML, forms, motion. Complements Anthropic's `frontend-design` (visual style) and ends with a static check. | `check.py`, `reference/performance.md`, `reference/ux-a11y.md` |
+| [squeeze](skills/squeeze/SKILL.md) | Shrinks big JSON, logs and HTML before Claude reads them (tables, repeat-collapsing, outlines with line numbers), keeping the exact original retrievable by id and line range. Manual, no proxy. | `squeeze.py` |
 
 ### Project skills (`project-skills/<project>/`)
 
